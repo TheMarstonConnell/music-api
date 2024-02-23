@@ -6,8 +6,8 @@ FROM golang:1.22 AS builder
 LABEL authors="marston"
 
 COPY . "/go/src/github.com/TheMarstonConnell/musicapi"
-COPY "cert.pem" "/etc/ssl/certs/ca-certificates.crt"
-COPY "cert.pem" "/etc/ssl/cert.pem"
+COPY "/etc/ssl/certs/ca-certificates.crt" "/etc/ssl/certs/ca-certificates.crt"
+#COPY "cert.pem" "/etc/ssl/cert.pem"
 
 WORKDIR "/go/src/github.com/TheMarstonConnell/musicapi"
 
