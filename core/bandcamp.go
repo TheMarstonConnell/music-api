@@ -2,11 +2,12 @@ package core
 
 import (
 	"fmt"
-	"github.com/gocolly/colly/v2"
-	"github.com/rs/zerolog/log"
 	"net/url"
 	"strconv"
 	"strings"
+
+	"github.com/gocolly/colly/v2"
+	"github.com/rs/zerolog/log"
 )
 
 func BCGetPrice(u *url.URL, inCurrency string) (float64, error) {
@@ -14,7 +15,7 @@ func BCGetPrice(u *url.URL, inCurrency string) (float64, error) {
 
 	c := colly.NewCollector()
 
-	var priceVal = 0.0
+	priceVal := 0.0
 	complete := false
 	foundAnything := false
 
@@ -70,7 +71,7 @@ func BCSearchAlbum(album string, currency string) (float64, string, error) {
 
 	found := false
 	bcl := ""
-	var p = 0.0
+	p := 0.0
 
 	// Find and visit all links
 	c.OnHTML(".result-info > .heading > a", func(e *colly.HTMLElement) {
@@ -96,7 +97,10 @@ func BCSearchAlbum(album string, currency string) (float64, string, error) {
 		log.Debug().Msgf("Visiting %s", r.URL)
 	})
 
-	c.Visit(u.String())
+	err = c.Visit(u.String())
+	if err != nil {
+		return p, bcl, err
+	}
 
 	return p, bcl, nil
 }

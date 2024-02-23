@@ -2,12 +2,13 @@ package core
 
 import (
 	"fmt"
-	"github.com/gocolly/colly/v2"
-	"github.com/rs/zerolog/log"
 	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/gocolly/colly/v2"
+	"github.com/rs/zerolog/log"
 )
 
 func QuoGetPrice(u *url.URL) (float64, error) {
@@ -15,11 +16,10 @@ func QuoGetPrice(u *url.URL) (float64, error) {
 
 	c := colly.NewCollector()
 
-	var priceVal = 0.0
+	priceVal := 0.0
 
 	// Find and visit all links
 	c.OnHTML(class, func(e *colly.HTMLElement) {
-
 		price := e.Text
 
 		s := strings.Replace(price, "$", "", -1)
@@ -37,13 +37,15 @@ func QuoGetPrice(u *url.URL) (float64, error) {
 		log.Debug().Msgf("Visiting %s", r.URL)
 	})
 
-	c.Visit(u.String())
-
+	err := c.Visit(u.String())
+	if err != nil {
+		return 0.0, err
+	}
 	return priceVal, nil
 }
 
 func QuoSearchAlbum(album string, region string) (float64, string, error) {
-	//path := "https://www.qobuz.com/ca-en/search?q=janelle+monae+archandroid"
+	// path := "https://www.qobuz.com/ca-en/search?q=janelle+monae+archandroid"
 
 	base := "https://www.qobuz.com"
 	b, err := url.Parse(base)
@@ -61,7 +63,7 @@ func QuoSearchAlbum(album string, region string) (float64, string, error) {
 
 	c := colly.NewCollector()
 
-	var price = 0.0
+	price := 0.0
 	l := ""
 
 	found := false
@@ -88,7 +90,9 @@ func QuoSearchAlbum(album string, region string) (float64, string, error) {
 		log.Debug().Msgf("Visiting %s", r.URL)
 	})
 
-	c.Visit(u.String())
-
+	err = c.Visit(u.String())
+	if err != nil {
+		return price, l, err
+	}
 	return price, l, nil
 }

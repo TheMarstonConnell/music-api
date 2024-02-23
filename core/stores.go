@@ -1,8 +1,9 @@
 package core
 
 import (
-	"github.com/rs/zerolog/log"
 	"sort"
+
+	"github.com/rs/zerolog/log"
 )
 
 type Store struct {
@@ -18,7 +19,6 @@ type Response struct {
 func NewResponse() *Response {
 	r := Response{make([]Store, 0)}
 	return &r
-
 }
 
 func (r *Response) AddStore(name string, link string, price float64) {

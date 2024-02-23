@@ -3,11 +3,13 @@ package core
 import (
 	"encoding/xml"
 	"fmt"
-	"github.com/rs/zerolog/log"
+	//nolint:all
 	"io/ioutil"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/rs/zerolog/log"
 )
 
 func getXML(url string) ([]byte, error) {
@@ -44,11 +46,9 @@ func Convert(fromAmount float64, fromCurrency string, toCurrency string) float64
 	t := m[strings.ToUpper(toCurrency)]
 
 	return (fromAmount / f) * t
-
 }
 
 func getConv() map[string]float64 {
-
 	m := make(map[string]float64)
 
 	if xmlBytes, err := getXML("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"); err != nil {

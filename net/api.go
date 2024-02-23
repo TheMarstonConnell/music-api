@@ -4,14 +4,15 @@ import (
 	"context"
 	"embed"
 	"fmt"
-	"github.com/TheMarstonConnell/music-api/core"
-	"github.com/TheMarstonConnell/music-api/net/templates"
-	"github.com/a-h/templ"
-	"github.com/rs/zerolog/log"
 	"io/fs"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/TheMarstonConnell/music-api/core"
+	"github.com/TheMarstonConnell/music-api/net/templates"
+	"github.com/a-h/templ"
+	"github.com/rs/zerolog/log"
 )
 
 //go:embed public/*
@@ -24,9 +25,9 @@ func GetAlbum() func(http.ResponseWriter, *http.Request) {
 		res := core.GetPrice(q)
 
 		s := templates.StoreList(res)
-		s.Render(context.Background(), w)
-		//w.Header().Set("Content-Type", "application/json")
-		//json.NewEncoder(w).Encode(res)
+		_ = s.Render(context.Background(), w)
+		// w.Header().Set("Content-Type", "application/json")
+		// json.NewEncoder(w).Encode(res)
 	}
 }
 
