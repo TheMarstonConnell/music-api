@@ -1,0 +1,17 @@
+package templates
+
+import "github.com/TheMarstonConnell/music-api/core"
+import "fmt"
+
+templ StoreList(res *core.Response) {
+    if len(res.Stores) > 0 {
+        <ul class="storelinks" >
+        for _, store := range res.Stores {
+            <li><a href={templ.URL(store.Link)} target="_blank" class="store-link"><span class="storeName">{ store.Name }</span><span class="store-price">{ fmt.Sprintf("$%.2f", store.Price) }</span></a></li>
+        }
+        </ul>
+    } else {
+        <span class="fail">Album not found</span>
+    }
+
+}

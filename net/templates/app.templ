@@ -1,0 +1,33 @@
+package templates
+
+templ App(css []string) {
+
+<html>
+    <head>
+        <title>Album Store Finder</title>
+        for _, cssItem := range css {
+        <link rel="stylesheet" href={ cssItem } />
+        }
+        <script type="text/javascript" src="/public/htmx.min.js" />
+        <script type="text/javascript" src="/public/script.js" />
+    </head>
+
+    <body>
+        <div id="spinner" class="htmx-indicator">
+            <img id="bars" src="/public/bars.svg"/>
+        </div>
+
+        <div>
+            <h1>Album Price Search</h1>
+            <form id="search-form"  hx-target="#searchlist" hx-get="/api/search" hx-trigger="submit" hx-indicator="#spinner">
+                <input type="text" name="q" placeholder="artist album" />
+                <input type="submit" />
+            </form>
+            <div id="searchlist"></div>
+        </div>
+
+
+    </body>
+</html>
+
+}
