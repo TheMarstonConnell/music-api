@@ -1,7 +1,9 @@
-install: tidy gen
+all: tidy install docker-build
+
+install: gen
 	@go install ./
 
-build: tidy gen
+build: gen
 	@go build -o build/backup ./
 
 remove-doc:
@@ -16,6 +18,9 @@ gen:
 
 tidy:
 	@go mod tidy
+
+docker-build:
+	@docker build -t music-api:latest .
 
 
 format-tools:

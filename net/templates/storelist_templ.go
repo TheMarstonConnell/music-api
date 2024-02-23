@@ -10,7 +10,7 @@ import "context"
 import "io"
 import "bytes"
 
-import "github.com/TheMarstonConnell/music-api/core"
+import "github.com/TheMarstonConnell/musicapi/core"
 import "fmt"
 
 func StoreList(res *core.Response) templ.Component {

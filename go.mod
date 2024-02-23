@@ -1,4 +1,4 @@
-module github.com/TheMarstonConnell/music-api
+module github.com/TheMarstonConnell/musicapi
 
 go 1.22.0
 

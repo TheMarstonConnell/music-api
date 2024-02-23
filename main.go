@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/TheMarstonConnell/music-api/net"
+	"github.com/TheMarstonConnell/musicapi/net"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )

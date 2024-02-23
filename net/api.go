@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/TheMarstonConnell/music-api/core"
-	"github.com/TheMarstonConnell/music-api/net/templates"
+	"github.com/TheMarstonConnell/musicapi/core"
+	"github.com/TheMarstonConnell/musicapi/net/templates"
 	"github.com/a-h/templ"
 	"github.com/rs/zerolog/log"
 )
@@ -63,11 +63,11 @@ func Start() {
 	mux.Handle("/", templ.Handler(component))
 
 	s := &http.Server{
-		Addr:           ":9797",
-		Handler:        mux,
-		ReadTimeout:    10 * time.Second,
-		WriteTimeout:   10 * time.Second,
-		MaxHeaderBytes: 1 << 20,
+		Addr:         ":9797",
+		Handler:      mux,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		// MaxHeaderBytes: 1 << 20,
 	}
 
 	err = s.ListenAndServe()

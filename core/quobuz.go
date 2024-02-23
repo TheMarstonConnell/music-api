@@ -70,6 +70,8 @@ func QuoSearchAlbum(album string, region string) (float64, string, error) {
 
 	// Find and visit all links
 	c.OnHTML(".btn__qobuz--see-album", func(e *colly.HTMLElement) {
+		log.Debug().Msgf("Visiting internally %s", e.Request.URL)
+
 		if found {
 			return
 		}
